@@ -9,7 +9,7 @@ Version: February 7th 2016
 """
 
 from SupplyChainActor import SupplyChainActor , SupplyChainQueue
-
+import numpy as np
 
 
 
@@ -119,8 +119,8 @@ class Retailer(SupplyChainActor):
 
 
 class Customer:
-    
-    def __init__(self , orders):
+
+    def __init__(self , orders , max_noise = 0):
         """
         -------------------------------------------------------
         Constructor for the Customer class.
@@ -132,6 +132,7 @@ class Customer:
         """
         self.totalBeerReceived = 0
         self.orders = orders
+        self.max_noise = max_noise
         return
     
     def RecieveFromRetailer(self, amountReceived):
@@ -161,7 +162,7 @@ class Customer:
         -------------------------------------------------------
         """
 
-        return self.orders[weekNum]
+        return self.orders[weekNum] + np.random.choice(self.max_noise)
     
     def GetBeerReceived(self):
         """
