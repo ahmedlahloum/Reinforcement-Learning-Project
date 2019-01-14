@@ -161,8 +161,8 @@ class Customer:
             for all other weeks. 
         -------------------------------------------------------
         """
-
-        return self.orders[weekNum] + np.random.choice(self.max_noise)
+        cnorder = self.orders[weekNum] + np.random.choice(self.max_noise) if self.max_noise > 0 else self.orders[weekNum]
+        return cnorder
     
     def GetBeerReceived(self):
         """
